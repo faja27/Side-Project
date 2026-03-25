@@ -3,22 +3,27 @@ from __future__ import annotations
 from telethon import events
 from telethon.tl.custom.message import Message
 
-from helpers.debug_tools import DebugMessageInfo, format_debug_info, shorten_text
+from core.filters import (
+    is_target_chat,
+    is_target_topic,
+    is_whitelisted_sender,
+    is_new_message,
+)
+from core.state_manager import BotState
 
 
 def _extract_topic_id(msg: Message) -> int | None:
     """
-    For forum topics (supergroups with topics), Telethon message may include:
-    - msg.reply_to.reply_to_msg_id for topic root (varies)
-    - msg.message_thread_id (newer)
-    We'll try common fields safely.
+    Extract topic/thread id from message.
+    Compatible with multiple Telethon versions.
     """
-    # Newer Telethon versions may have message_thread_id
+
+    # Newer field
     topic_id = getattr(msg, "message_thread_id", None)
     if topic_id:
         return int(topic_id)
 
-    # Fallback: some topic messages can be inferred from reply_to
+    # Fallback
     reply_to = getattr(msg, "reply_to", None)
     if reply_to and getattr(reply_to, "reply_to_msg_id", None):
         return int(reply_to.reply_to_msg_id)
@@ -26,42 +31,71 @@ def _extract_topic_id(msg: Message) -> int | None:
     return None
 
 
-def register_debug_listener(client, *, only_incoming: bool = True) -> None:
+def register_filtered_listener(client, state: BotState) -> None:
     """
-    Register a debug listener that prints metadata for every new message.
-    Use this to discover:
-    - chat_id
-    - topic/thread id
-    - sender_id
+    Listener with:
+    - chat filter
+    - topic filter
+    - sender whitelist
+    - state control (armed / triggered)
     """
 
-    @client.on(events.NewMessage(incoming=only_incoming))
+    @client.on(events.NewMessage(incoming=True))
     async def handler(event: events.NewMessage.Event) -> None:
         msg: Message = event.message
 
-        chat = await event.get_chat()
+        chat_id = int(event.chat_id) if event.chat_id else 0
+        msg_id = int(msg.id)
+
         sender = await event.get_sender()
-
-        chat_title = getattr(chat, "title", None)
-        chat_id = int(event.chat_id) if event.chat_id is not None else 0
-
         sender_id = getattr(sender, "id", None)
-        sender_username = getattr(sender, "username", None)
 
-        # Topic info
-        is_topic_message = bool(getattr(msg, "is_topic_message", False))
-        topic_id = _extract_topic_id(msg) if is_topic_message else None
+        topic_id = _extract_topic_id(msg)
 
-        info = DebugMessageInfo(
-            chat_id=chat_id,
-            chat_title=chat_title,
-            message_id=int(msg.id),
-            sender_id=int(sender_id) if sender_id is not None else None,
-            sender_username=str(sender_username) if sender_username else None,
-            is_topic_message=is_topic_message,
-            topic_id=topic_id,
-            date_iso=str(msg.date),
-            text_preview=shorten_text(msg.message or ""),
-        )
+        # =========================
+        # STATE CHECK
+        # =========================
+        if not state.is_armed():
+            return
 
-        print(format_debug_info(info))
+        if state.has_triggered():
+            return
+
+        # =========================
+        # FILTER SECTION
+        # =========================
+        if not is_target_chat(chat_id):
+            return
+
+        if not is_target_topic(topic_id):
+            return
+
+        if not is_whitelisted_sender(sender_id):
+            return
+
+        if not is_new_message(msg_id, state.get_last_seen()):
+            return
+
+        # =========================
+        # UPDATE STATE
+        # =========================
+        state.set_last_seen(msg_id)
+
+        # =========================
+        # DEBUG OUTPUT (TARGET HIT)
+        # =========================
+        print("\n🔥 TARGET MESSAGE DETECTED")
+        print(f"Chat ID   : {chat_id}")
+        print(f"Topic ID  : {topic_id}")
+        print(f"Sender ID : {sender_id}")
+        print(f"Msg ID    : {msg_id}")
+        print(f"Text      : {msg.text}\n")
+
+        # =========================
+        # TRIGGER (TEMP)
+        # =========================
+        state.mark_triggered()
+
+        # NOTE:
+        # Hari 4 next day → parse CA di sini
+        # Hari 5 next next day → execute buy di sini
