@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XENON | $XENO — The Alien Memecoin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================== CSS VARIABLES ===================== */
+    :root {
+      --color-primary:     #00ff88;
+      --color-accent:      #00e5ff;
+      --color-bg:          #030810;
+      --color-bg-surface:  #070f1e;
+      --color-bg-card:     #0b1729;
+      --color-border:      rgba(0, 255, 136, 0.15);
+      --color-text:        #c8d8e8;
+      --color-text-dim:    #5a7a9a;
+      --color-white:       #ffffff;
+
+      --font-heading:      'Orbitron', sans-serif;
+      --font-body:         'Exo 2', sans-serif;
+
+      --space-xs:   0.25rem;
+      --space-sm:   0.5rem;
+      --space-md:   1rem;
+      --space-lg:   1.5rem;
+      --space-xl:   2.5rem;
+      --space-2xl:  4rem;
+
+      --radius-sm:  4px;
+      --radius-md:  8px;
+      --radius-lg:  16px;
+      --radius-pill: 999px;
+
+      --nav-h:      72px;
+      --transition: 0.3s ease;
+
+      --glow-green: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 60px rgba(0, 255, 136, 0.15);
+      --glow-cyan:  0 0 20px rgba(0, 229, 255, 0.5), 0 0 60px rgba(0, 229, 255, 0.15);
+    }
+
+    /* ===================== RESET ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===================== BACKGROUND ===================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 255, 136, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===================== NAVBAR ===================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: rgba(3, 8, 16, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 var(--space-xl);
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      letter-spacing: 0.15em;
+      text-shadow: var(--glow-green);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .nav-logo span { font-size: 1.6rem; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      transition: color var(--transition), text-shadow var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--color-primary);
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), #00cc6a);
+      color: #000;
+      box-shadow: var(--glow-green);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.7), 0 0 80px rgba(0, 255, 136, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      box-shadow: inset 0 0 0 0 var(--color-accent);
+    }
+    .btn-outline:hover {
+      background: rgba(0, 229, 255, 0.1);
+      box-shadow: var(--glow-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: var(--space-sm);
+      background: none;
+      border: none;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: rgba(7, 15, 30, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-lg) var(--space-xl);
+      flex-direction: column;
+      gap: var(--space-md);
+      z-index: 99;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--transition);
+    }
+    .mobile-nav a:hover { color: var(--color-primary); }
+    .mobile-nav .btn { width: 100%; margin-top: var(--space-sm); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    /* --- hero left --- */
+    .hero-left { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid rgba(0, 255, 136, 0.25);
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 1rem;
+      width: fit-content;
+    }
+    .hero-label::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 8px var(--color-primary);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: 0.05em;
+    }
+    .hero-headline .line-main {
+      display: block;
+      color: var(--color-white);
+      text-shadow: 0 0 40px rgba(255,255,255,0.1);
+    }
+    .hero-headline .line-ticker {
+      display: block;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.4));
+    }
+
+    .hero-subtext {
+      font-size: 1.05rem;
+      color: var(--color-text-dim);
+      max-width: 480px;
+      line-height: 1.75;
+    }
+    .hero-subtext strong { color: var(--color-accent); font-weight: 600; }
+
+    .hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .hero-cta .btn { padding: 0.85rem 2rem; font-size: 0.82rem; }
+
+    /* stats bar */
+    .stats-bar {
+      display: flex;
+      gap: var(--space-lg);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      width: fit-content;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stat-item + .stat-item {
+      padding-left: var(--space-lg);
+      border-left: 1px solid var(--color-border);
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+    .stat-value {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+
+    /* --- hero right --- */
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .mascot-wrapper {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mascot-emoji {
+      font-size: 9rem;
+      position: relative;
+      z-index: 3;
+      animation: bounce 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.6));
+      cursor: default;
+      user-select: none;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-18px); }
+    }
+
+    /* glow pulse behind mascot */
+    .mascot-glow {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,136,0.2) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50%       { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* orbit rings */
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      animation: spin linear infinite;
+    }
+
+    .orbit-ring-1 {
+      width: 220px;
+      height: 220px;
+      border-color: rgba(0, 255, 136, 0.25);
+      border-top-color: var(--color-primary);
+      animation-duration: 6s;
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.15);
+    }
+
+    .orbit-ring-2 {
+      width: 280px;
+      height: 280px;
+      border-color: rgba(0, 229, 255, 0.15);
+      border-bottom-color: var(--color-accent);
+      animation-duration: 10s;
+      animation-direction: reverse;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.1);
+    }
+
+    .orbit-ring-3 {
+      width: 320px;
+      height: 320px;
+      border-color: rgba(0, 255, 136, 0.08);
+      border-left-color: rgba(0, 255, 136, 0.3);
+      animation-duration: 16s;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* orbit dot */
+    .orbit-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 10px var(--color-primary);
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .orbit-ring-2 .orbit-dot {
+      background: var(--color-accent);
+      box-shadow: 0 0 10px var(--color-accent);
+    }
+
+    /* corner decorations */
+    .corner-deco {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      opacity: 0.4;
+    }
+    .corner-deco.tl { top: 10px; left: 10px; border-top: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); }
+    .corner-deco.tr { top: 10px; right: 10px; border-top: 2px solid var(--color-primary); border-right: 2px solid var(--color-primary); }
+    .corner-deco.bl { bottom: 10px; left: 10px; border-bottom: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); }
+    .corner-deco.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--color-primary); border-right: 2px solid var(--color-primary); }
+
+    /* floating particles */
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      animation: float-particle linear infinite;
+      opacity: 0;
+    }
+    @keyframes float-particle {
+      0%   { opacity: 0; transform: translateY(0) scale(0); }
+      10%  { opacity: 1; transform: translateY(-10px) scale(1); }
+      90%  { opacity: 0.5; }
+      100% { opacity: 0; transform: translateY(-80px) scale(0); }
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .navbar { padding: 0 var(--space-md); }
+
+      .nav-links, .nav-links .btn { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: var(--space-xl) var(--space-md); }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+        text-align: center;
+      }
+
+      .hero-label { margin: 0 auto; }
+      .hero-subtext { margin: 0 auto; }
+      .hero-cta { justify-content: center; }
+      .stats-bar { margin: 0 auto; justify-content: center; }
+      .stat-item + .stat-item { border-left: none; padding-left: 0; }
+
+      .hero-right { order: -1; }
+      .mascot-wrapper { width: 260px; height: 260px; }
+      .mascot-emoji { font-size: 7rem; }
+      .orbit-ring-1 { width: 170px; height: 170px; }
+      .orbit-ring-2 { width: 220px; height: 220px; }
+      .orbit-ring-3 { width: 260px; height: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span>👾</span> XENON
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#tokenomics">Tokenomics</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#how-to-buy">How to Buy</a></li>
+        <li><a href="#buy" class="btn btn-primary">Buy Now</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- mobile menu -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about"      onclick="closeMobile()">About</a>
+    <a href="#tokenomics" onclick="closeMobile()">Tokenomics</a>
+    <a href="#roadmap"    onclick="closeMobile()">Roadmap</a>
+    <a href="#how-to-buy" onclick="closeMobile()">How to Buy</a>
+    <a href="#buy" class="btn btn-primary" onclick="closeMobile()">Buy Now</a>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="hero-label">Transmitting from Planet X-9</div>
+
+        <h1 class="hero-headline">
+          <span class="line-main">XENON</span>
+          <span class="line-ticker">$XENO</span>
+        </h1>
+
+        <p class="hero-subtext">
+          They came from the void beyond the stars — and they brought a <strong>memecoin</strong>.
+          Join the galactic horde. <strong>HODL or be vaporized.</strong>
+          The alien takeover begins on-chain.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#buy" class="btn btn-primary">Buy $XENO</a>
+          <a href="#whitepaper" class="btn btn-outline">Whitepaper</a>
+        </div>
+
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-label">Price</span>
+            <span class="stat-value">$0.000001</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Market Cap</span>
+            <span class="stat-value">$420K</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Holders</span>
+            <span class="stat-value">6,900+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="hero-right">
+        <div class="mascot-wrapper" id="mascotWrapper">
+          <div class="corner-deco tl"></div>
+          <div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div>
+          <div class="corner-deco br"></div>
+
+          <div class="orbit-ring orbit-ring-3">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring orbit-ring-2">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit-ring orbit-ring-1">
+            <div class="orbit-dot"></div>
+          </div>
+
+          <div class="mascot-glow"></div>
+          <div class="mascot-emoji">👾</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== JS ==================== -->
+  <script>
+    // hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }
+
+    // floating particles
+    const wrapper = document.getElementById('mascotWrapper');
+    function spawnParticle() {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 4 + 2;
+      p.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        left: ${Math.random() * 100}%;
+        bottom: ${Math.random() * 30}%;
+        animation-duration: ${Math.random() * 2 + 1.5}s;
+        animation-delay: ${Math.random() * 0.5}s;
+        background: ${Math.random() > 0.5 ? 'var(--color-primary)' : 'var(--color-accent)'};
+        box-shadow: 0 0 6px ${Math.random() > 0.5 ? 'var(--color-primary)' : 'var(--color-accent)'};
+      `;
+      wrapper.appendChild(p);
+      setTimeout(() => p.remove(), 3000);
+    }
+    setInterval(spawnParticle, 400);
+  </script>
+
+</body>
+</html>
