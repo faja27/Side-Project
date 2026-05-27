@@ -1039,6 +1039,508 @@
     }
     .htb-card:last-child .htb-arrow { display: none; }
 
+    /* ===================== LOADING SCREEN ===================== */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--color-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xl);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-logo {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: var(--color-primary);
+      text-shadow: var(--glow-green);
+      animation: flicker 1.5s ease-in-out infinite;
+    }
+    @keyframes flicker {
+      0%,100% { opacity: 1; }
+      92%      { opacity: 1; }
+      93%      { opacity: 0.4; }
+      94%      { opacity: 1; }
+      96%      { opacity: 0.2; }
+      97%      { opacity: 1; }
+    }
+    .loader-text {
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+    .loader-bar-wrap {
+      width: 260px;
+      height: 2px;
+      background: rgba(0,255,136,0.1);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-pill);
+      box-shadow: 0 0 10px var(--color-primary);
+      transition: width 2.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===================== CANVAS PARTICLES ===================== */
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===================== FLOATING BUY BUTTON ===================== */
+    #floatBtn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 500;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.6rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--color-primary), #00cc6a);
+      color: #000;
+      box-shadow: var(--glow-green);
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease;
+      pointer-events: none;
+      animation: float-btn-pulse 2.5s ease-in-out infinite;
+    }
+    #floatBtn.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    #floatBtn:hover {
+      box-shadow: 0 0 30px rgba(0,255,136,0.8), 0 0 60px rgba(0,255,136,0.3);
+      transform: translateY(-3px) scale(1.02);
+    }
+    @keyframes float-btn-pulse {
+      0%,100% { box-shadow: var(--glow-green); }
+      50%      { box-shadow: 0 0 30px rgba(0,255,136,0.7), 0 0 80px rgba(0,255,136,0.25); }
+    }
+
+    /* ===================== NAVBAR: scrollspy + hide ===================== */
+    .navbar { transition: transform 0.35s ease, background 0.35s ease; }
+    .navbar.hidden { transform: translateY(-100%); }
+    .nav-links a.active {
+      color: var(--color-primary);
+      text-shadow: 0 0 10px rgba(0,255,136,0.6);
+    }
+
+    /* ===================== ROADMAP ===================== */
+    .roadmap {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-2xl) var(--space-xl);
+    }
+    .roadmap-header { text-align: center; margin-bottom: var(--space-2xl); }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* center spine */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg,
+        var(--color-primary) 0%,
+        var(--color-accent) 50%,
+        rgba(0,255,136,0.1) 100%);
+      box-shadow: 0 0 12px rgba(0,255,136,0.3);
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: center;
+      min-height: 120px;
+      padding: var(--space-lg) 0;
+    }
+
+    /* center node */
+    .tl-node {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .tl-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--color-primary);
+      background: var(--color-bg);
+      box-shadow: 0 0 12px rgba(0,255,136,0.5);
+      flex-shrink: 0;
+    }
+    .tl-item.done   .tl-dot { background: var(--color-primary); box-shadow: 0 0 16px rgba(0,255,136,0.7); }
+    .tl-item.active .tl-dot { background: #fbbf24; border-color: #fbbf24; box-shadow: 0 0 16px rgba(251,191,36,0.6); animation: tl-pulse 1.8s ease-in-out infinite; }
+    @keyframes tl-pulse {
+      0%,100% { box-shadow: 0 0 12px rgba(251,191,36,0.5); }
+      50%      { box-shadow: 0 0 24px rgba(251,191,36,0.9); }
+    }
+
+    /* card */
+    .tl-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      transition: all var(--transition);
+      position: relative;
+    }
+    .tl-card:hover {
+      border-color: rgba(0,255,136,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    /* arrow connector from card to spine */
+    .tl-item:nth-child(odd)  .tl-card { margin-right: var(--space-md); text-align: right; }
+    .tl-item:nth-child(even) .tl-card { margin-left:  var(--space-md); }
+
+    .tl-item:nth-child(odd)  .tl-left  { grid-column: 1; }
+    .tl-item:nth-child(odd)  .tl-right { grid-column: 3; display: none; }
+    .tl-item:nth-child(even) .tl-left  { display: none; }
+    .tl-item:nth-child(even) .tl-right { grid-column: 3; }
+    .tl-item:nth-child(even) .tl-node  { grid-column: 2; }
+
+    /* "connector" line from card edge to node */
+    .tl-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: var(--space-md);
+      height: 1px;
+      background: var(--color-border);
+    }
+    .tl-item:nth-child(odd)  .tl-card::after { right: calc(-1 * var(--space-md)); }
+    .tl-item:nth-child(even) .tl-card::after { left:  calc(-1 * var(--space-md)); }
+
+    .tl-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
+      width: fit-content;
+    }
+    .tl-item:nth-child(odd) .tl-badge  { margin-left: auto; }
+    .tl-badge.done   { background: rgba(0,255,136,0.12); color: var(--color-primary); border: 1px solid rgba(0,255,136,0.3); }
+    .tl-badge.active { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+    .tl-badge.soon   { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+    .tl-badge.moon   { background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); }
+
+    .tl-phase {
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+    .tl-title {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+    .tl-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .tl-items-list li {
+      font-size: 0.78rem;
+      color: var(--color-text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tl-item:nth-child(odd) .tl-items-list li { flex-direction: row-reverse; }
+    .tl-items-list li::before {
+      content: '›';
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .tl-item:nth-child(odd) .tl-items-list li::before { content: '‹'; }
+
+    /* ===================== COMMUNITY ===================== */
+    .community {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-2xl) var(--space-xl);
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+
+    /* alien dot pattern bg */
+    .community::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(0,255,136,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+
+    .community-inner {
+      position: relative;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xl);
+    }
+
+    .community-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: var(--color-white);
+      line-height: 1.1;
+    }
+    .community-headline span {
+      display: block;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .community-sub {
+      font-size: 1rem;
+      color: var(--color-text-dim);
+      max-width: 480px;
+      line-height: 1.75;
+    }
+
+    .social-grid {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .social-btn .s-icon { font-size: 1.1rem; }
+
+    .social-btn.tg {
+      background: rgba(33,150,243,0.1);
+      border-color: rgba(33,150,243,0.3);
+      color: #64b5f6;
+    }
+    .social-btn.tg:hover {
+      background: rgba(33,150,243,0.2);
+      box-shadow: 0 0 20px rgba(33,150,243,0.4), 0 0 50px rgba(33,150,243,0.1);
+      transform: translateY(-3px);
+    }
+
+    .social-btn.tw {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.2);
+      color: #e2e8f0;
+    }
+    .social-btn.tw:hover {
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
+
+    .social-btn.dc {
+      background: rgba(88,101,242,0.1);
+      border-color: rgba(88,101,242,0.3);
+      color: #a5b4fc;
+    }
+    .social-btn.dc:hover {
+      background: rgba(88,101,242,0.2);
+      box-shadow: 0 0 20px rgba(88,101,242,0.4), 0 0 50px rgba(88,101,242,0.1);
+      transform: translateY(-3px);
+    }
+
+    .social-btn.dx {
+      background: rgba(0,255,136,0.08);
+      border-color: rgba(0,255,136,0.25);
+      color: var(--color-primary);
+    }
+    .social-btn.dx:hover {
+      background: rgba(0,255,136,0.15);
+      box-shadow: var(--glow-green);
+      transform: translateY(-3px);
+    }
+
+    /* alien counter strip */
+    .community-strip {
+      display: flex;
+      gap: var(--space-xl);
+      padding: var(--space-md) var(--space-xl);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .strip-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .strip-val {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      text-shadow: 0 0 12px rgba(0,255,136,0.4);
+    }
+    .strip-lbl {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-xl) var(--space-xl) var(--space-lg);
+      background: var(--color-bg);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      letter-spacing: 0.15em;
+      text-shadow: var(--glow-green);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+    }
+    .footer-socials a {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      transition: color var(--transition);
+    }
+    .footer-socials a:hover { color: var(--color-primary); }
+
+    .footer-contract {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .fc-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      flex-shrink: 0;
+    }
+    .fc-addr {
+      font-family: var(--font-heading);
+      font-size: 0.62rem;
+      color: rgba(0,255,136,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(0,255,136,0.06);
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--color-text-dim);
+    }
+    .footer-disclaimer {
+      font-size: 0.68rem;
+      color: rgba(90,122,154,0.7);
+      max-width: 420px;
+      text-align: right;
+    }
+
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 768px) {
       .navbar { padding: 0 var(--space-md); }
@@ -1096,11 +1598,51 @@
 
     @media (max-width: 480px) {
       .dist-grid { grid-template-columns: 1fr; }
-      .htb-grid { grid-template-columns: 1fr; }
+      .htb-grid  { grid-template-columns: 1fr; }
+    }
+
+    /* roadmap mobile */
+    @media (max-width: 680px) {
+      .roadmap { padding: var(--space-xl) var(--space-md); }
+      .timeline::before { left: 18px; }
+      .tl-item {
+        grid-template-columns: 36px 1fr;
+        padding: var(--space-md) 0;
+      }
+      .tl-item:nth-child(odd)  .tl-left  { display: none; }
+      .tl-item:nth-child(odd)  .tl-right { display: block; grid-column: 2; }
+      .tl-item:nth-child(odd)  .tl-node  { grid-column: 1; }
+      .tl-item:nth-child(even) .tl-node  { grid-column: 1; }
+      .tl-item:nth-child(even) .tl-right { grid-column: 2; }
+      .tl-item:nth-child(odd)  .tl-card  { margin-right: 0; margin-left: var(--space-sm); text-align: left; }
+      .tl-item:nth-child(even) .tl-card  { margin-left: var(--space-sm); }
+      .tl-item:nth-child(odd)  .tl-badge { margin-left: 0; }
+      .tl-item:nth-child(odd)  .tl-items-list li { flex-direction: row; }
+      .tl-item:nth-child(odd)  .tl-items-list li::before { content: '›'; }
+      .tl-card::after { display: none; }
+      .tl-dot { width: 14px; height: 14px; }
+    }
+
+    /* community + footer mobile */
+    @media (max-width: 600px) {
+      .community { padding: var(--space-xl) var(--space-md); }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; }
+      .footer-disclaimer { text-align: left; }
+      #floatBtn { bottom: 16px; right: 16px; padding: 0.7rem 1.3rem; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ==================== LOADING SCREEN ==================== -->
+  <div id="loader">
+    <div class="loader-logo">👾 XENON</div>
+    <div class="loader-text">Initializing alien protocol...</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+  </div>
 
   <!-- ==================== NAVBAR ==================== -->
   <nav class="navbar">
@@ -1136,6 +1678,7 @@
 
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="hero">
+    <canvas id="particleCanvas"></canvas>
     <div class="hero-inner">
 
       <!-- LEFT -->
@@ -1147,11 +1690,7 @@
           <span class="line-ticker">$XENO</span>
         </h1>
 
-        <p class="hero-subtext">
-          They came from the void beyond the stars — and they brought a <strong>memecoin</strong>.
-          Join the galactic horde. <strong>HODL or be vaporized.</strong>
-          The alien takeover begins on-chain.
-        </p>
+        <p class="hero-subtext" id="heroSubtext">They came from the void beyond the stars — and they brought a memecoin. Join the galactic horde. HODL or be vaporized. The alien takeover begins on-chain.</p>
 
         <div class="hero-cta">
           <a href="#buy" class="btn btn-primary">Buy $XENO</a>
@@ -1161,15 +1700,15 @@
         <div class="stats-bar">
           <div class="stat-item">
             <span class="stat-label">Price</span>
-            <span class="stat-value">$0.000001</span>
+            <span class="stat-value" id="statPrice">$0.000001</span>
           </div>
           <div class="stat-item">
             <span class="stat-label">Market Cap</span>
-            <span class="stat-value">$420K</span>
+            <span class="stat-value" id="statMcap">$420K</span>
           </div>
           <div class="stat-item">
             <span class="stat-label">Holders</span>
-            <span class="stat-value">6,900+</span>
+            <span class="stat-value" id="statHold">6,900+</span>
           </div>
         </div>
       </div>
@@ -1403,102 +1942,512 @@
     </div>
   </section>
 
+  <!-- ==================== ROADMAP ==================== -->
+  <section class="roadmap" id="roadmap">
+    <div class="section-inner">
+      <div class="roadmap-header">
+        <div class="section-tag" style="justify-content:center;">Mission Timeline</div>
+        <h2 class="section-title">The <span class="highlight">Roadmap</span></h2>
+        <p style="color:var(--color-text-dim);font-size:0.95rem;max-width:480px;margin:0 auto;">
+          Four phases of galactic conquest. The aliens are patient — but not forever.
+        </p>
+      </div>
+
+      <div class="timeline">
+
+        <!-- Phase 1 — left -->
+        <div class="tl-item done">
+          <div class="tl-left">
+            <div class="tl-card">
+              <span class="tl-badge done">✅ Done</span>
+              <span class="tl-phase">Phase 1</span>
+              <div class="tl-title">First Contact</div>
+              <ul class="tl-items-list">
+                <li>Launch website &amp; landing page</li>
+                <li>Deploy smart contract on ETH</li>
+                <li>Open Telegram &amp; Twitter/X</li>
+                <li>Initial liquidity locked</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-right"></div>
+        </div>
+
+        <!-- Phase 2 — right -->
+        <div class="tl-item active">
+          <div class="tl-left"></div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-right">
+            <div class="tl-card">
+              <span class="tl-badge active">🔄 In Progress</span>
+              <span class="tl-phase">Phase 2</span>
+              <div class="tl-title">Expansion Protocol</div>
+              <ul class="tl-items-list">
+                <li>CEX listing (Gate.io, MEXC)</li>
+                <li>Reach 10,000 holders</li>
+                <li>Smart contract audit</li>
+                <li>CoinGecko &amp; CoinMarketCap listing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 — left -->
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-card">
+              <span class="tl-badge soon">🔜 Soon</span>
+              <span class="tl-phase">Phase 3</span>
+              <div class="tl-title">Alien Culture Drop</div>
+              <ul class="tl-items-list">
+                <li>XENON NFT collection launch</li>
+                <li>Merch store (alien fits)</li>
+                <li>Influencer collabs &amp; raids</li>
+                <li>Community governance vote</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-right"></div>
+        </div>
+
+        <!-- Phase 4 — right -->
+        <div class="tl-item">
+          <div class="tl-left"></div>
+          <div class="tl-node"><div class="tl-dot"></div></div>
+          <div class="tl-right">
+            <div class="tl-card">
+              <span class="tl-badge moon">🌕 Moon</span>
+              <span class="tl-phase">Phase 4</span>
+              <div class="tl-title">Galactic Domination</div>
+              <ul class="tl-items-list">
+                <li>Cross-chain bridge (BSC, Base)</li>
+                <li>XENO ecosystem &amp; dApp</li>
+                <li>Top-tier CEX listing</li>
+                <li>Intergalactic takeover complete</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== COMMUNITY ==================== -->
+  <section class="community" id="community">
+    <div class="community-inner">
+      <div>
+        <div class="section-tag" style="justify-content:center;">Join the Fleet</div>
+        <h2 class="community-headline">
+          Join the<span>Alien Horde 👾</span>
+        </h2>
+      </div>
+      <p class="community-sub">
+        The galactic army grows by the hour. Follow every channel, raid every post,
+        and spread the signal. No one gets left behind — except the paper hands.
+      </p>
+
+      <div class="community-strip">
+        <div class="strip-stat">
+          <span class="strip-val" data-target="6900">0</span>
+          <span class="strip-lbl">Holders</span>
+        </div>
+        <div class="strip-stat">
+          <span class="strip-val" data-target="12400">0</span>
+          <span class="strip-lbl">Telegram Members</span>
+        </div>
+        <div class="strip-stat">
+          <span class="strip-val" data-target="8750">0</span>
+          <span class="strip-lbl">Twitter Followers</span>
+        </div>
+        <div class="strip-stat">
+          <span class="strip-val" data-target="3200">0</span>
+          <span class="strip-lbl">Discord Members</span>
+        </div>
+      </div>
+
+      <div class="social-grid">
+        <a href="#" class="social-btn tg">
+          <span class="s-icon">✈️</span> Telegram
+        </a>
+        <a href="#" class="social-btn tw">
+          <span class="s-icon">𝕏</span> Twitter / X
+        </a>
+        <a href="#" class="social-btn dc">
+          <span class="s-icon">💬</span> Discord
+        </a>
+        <a href="#" class="social-btn dx">
+          <span class="s-icon">📊</span> Dextools
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo">👾 XENON</div>
+        <div class="footer-socials">
+          <a href="#">Telegram</a>
+          <a href="#">Twitter</a>
+          <a href="#">Discord</a>
+          <a href="#">Dextools</a>
+        </div>
+      </div>
+
+      <div class="footer-contract">
+        <span class="fc-label">CA:</span>
+        <span class="fc-addr">0x1A2b3C4d5E6f7A8b9C0d1E2f3A4b5C6d7E8f9A0b</span>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 XENON. All rights reserved across the galaxy.</span>
+        <span class="footer-disclaimer">Not financial advice. For entertainment purposes only. Crypto involves risk. DYOR before investing.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING BUY BUTTON ==================== -->
+  <button id="floatBtn" onclick="window.location.href='#buy'">🚀 Buy $XENO</button>
+
   <!-- ==================== JS ==================== -->
   <script>
-    // hamburger toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
+  /* ============================================================
+     LOADING SCREEN
+  ============================================================ */
+  (function () {
+    const loader = document.getElementById('loader');
+    const bar    = document.getElementById('loaderBar');
+    if (!loader) return;
+    requestAnimationFrame(() => {
+      bar.style.width = '100%';
+    });
+    setTimeout(() => loader.classList.add('hidden'), 2500);
+    loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+  })();
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileNav.classList.toggle('open');
+  /* ============================================================
+     HAMBURGER / MOBILE NAV
+  ============================================================ */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }
+
+  /* ============================================================
+     SMOOTH SCROLL FOR ALL ANCHORS
+  ============================================================ */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      closeMobile();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* ============================================================
+     NAVBAR: AUTO-HIDE ON SCROLL DOWN + SCROLLSPY
+  ============================================================ */
+  const navbar   = document.querySelector('.navbar');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = document.querySelectorAll('section[id]');
+  let lastY = 0;
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+
+    // auto-hide
+    if (y > 80) {
+      navbar.classList.toggle('hidden', y > lastY);
+    } else {
+      navbar.classList.remove('hidden');
+    }
+    lastY = y;
+
+    // scrollspy
+    let current = '';
+    sections.forEach(s => {
+      if (s.offsetTop - 100 <= y) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
 
-    function closeMobile() {
-      hamburger.classList.remove('open');
-      mobileNav.classList.remove('open');
+    // floating button
+    document.getElementById('floatBtn').classList.toggle('visible', y > 300);
+  }, { passive: true });
+
+  /* ============================================================
+     CANVAS PARTICLE NETWORK — HERO
+  ============================================================ */
+  (function () {
+    const canvas = document.getElementById('particleCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const COUNT = 80;
+    const CONNECT_DIST = 120;
+    const COLORS = ['#00ff88', '#00e5ff'];
+    let W, H, particles;
+
+    function resize() {
+      const hero = document.getElementById('hero');
+      W = canvas.width  = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight;
     }
 
-    // floating particles
-    const wrapper = document.getElementById('mascotWrapper');
-    function spawnParticle() {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const size = Math.random() * 4 + 2;
-      p.style.cssText = `
-        width: ${size}px;
-        height: ${size}px;
-        left: ${Math.random() * 100}%;
-        bottom: ${Math.random() * 30}%;
-        animation-duration: ${Math.random() * 2 + 1.5}s;
-        animation-delay: ${Math.random() * 0.5}s;
-        background: ${Math.random() > 0.5 ? 'var(--color-primary)' : 'var(--color-accent)'};
-        box-shadow: 0 0 6px ${Math.random() > 0.5 ? 'var(--color-primary)' : 'var(--color-accent)'};
-      `;
-      wrapper.appendChild(p);
-      setTimeout(() => p.remove(), 3000);
+    function makeParticle() {
+      return {
+        x:  Math.random() * W,
+        y:  Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r:  Math.random() * 1.5 + 0.5,
+        c:  COLORS[Math.random() > 0.5 ? 0 : 1],
+      };
     }
-    setInterval(spawnParticle, 400);
 
-    // copy contract address
-    function copyContract() {
-      const addr = document.getElementById('contractAddr').textContent;
-      const btn  = document.getElementById('copyBtn');
-      const toast = document.getElementById('copyToast');
-      navigator.clipboard.writeText(addr).then(() => {
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        toast.classList.add('show');
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.classList.remove('copied');
-          toast.classList.remove('show');
-        }, 2500);
-      }).catch(() => {
-        // fallback for non-secure context
-        const ta = document.createElement('textarea');
-        ta.value = addr;
-        ta.style.cssText = 'position:fixed;opacity:0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 2500);
+    function init() {
+      resize();
+      particles = Array.from({ length: COUNT }, makeParticle);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.c;
+        ctx.fill();
       });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = particles[i].c;
+            ctx.globalAlpha = 1 - dist / CONNECT_DIST;
+            ctx.lineWidth = 0.4;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      requestAnimationFrame(draw);
     }
 
-    // animate dist bars on scroll into view
-    const distBars = document.querySelectorAll('.dist-bar');
-    const barObserver = new IntersectionObserver((entries) => {
+    init();
+    draw();
+    window.addEventListener('resize', () => { resize(); particles.forEach(p => { p.x = Math.min(p.x, W); p.y = Math.min(p.y, H); }); });
+  })();
+
+  /* ============================================================
+     MASCOT FLOATING PARTICLES
+  ============================================================ */
+  const mascotWrapper = document.getElementById('mascotWrapper');
+  function spawnParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    const isGreen = Math.random() > 0.5;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;bottom:${Math.random()*30}%;
+      animation-duration:${Math.random()*2+1.5}s;
+      animation-delay:${Math.random()*0.5}s;
+      background:${isGreen ? 'var(--color-primary)' : 'var(--color-accent)'};
+      box-shadow:0 0 6px ${isGreen ? 'var(--color-primary)' : 'var(--color-accent)'};
+    `;
+    mascotWrapper.appendChild(p);
+    setTimeout(() => p.remove(), 3000);
+  }
+  setInterval(spawnParticle, 400);
+
+  /* ============================================================
+     TYPING EFFECT — HERO SUBTEXT
+  ============================================================ */
+  (function () {
+    const el = document.getElementById('heroSubtext');
+    if (!el) return;
+    const full = el.textContent.trim();
+    el.textContent = '';
+    el.style.opacity = '1';
+    let i = 0;
+    function type() {
+      if (i < full.length) {
+        el.textContent += full[i++];
+        setTimeout(type, i < 5 ? 0 : Math.random() * 18 + 8);
+      }
+    }
+    setTimeout(type, 2700);
+  })();
+
+  /* ============================================================
+     COUNTER ANIMATION — STATS HERO + COMMUNITY STRIP
+  ============================================================ */
+  function animateCounter(el, target, suffix) {
+    const duration = 2000;
+    const start = performance.now();
+    function step(now) {
+      const p  = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val  = Math.floor(ease * target);
+      el.textContent = val.toLocaleString() + (suffix || '');
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* stats bar counters — start on load after loader */
+  setTimeout(() => {
+    const priceEl = document.getElementById('statPrice');
+    const mcapEl  = document.getElementById('statMcap');
+    const holdEl  = document.getElementById('statHold');
+    if (priceEl) priceEl.textContent = '$0.000001';
+    if (mcapEl)  animateCounterText(mcapEl, 420, '$', 'K');
+    if (holdEl)  animateCounterText(holdEl, 6900, '', '+');
+  }, 2700);
+
+  function animateCounterText(el, target, prefix, suffix) {
+    const duration = 1800;
+    const start = performance.now();
+    function step(now) {
+      const p   = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = (prefix || '') + Math.floor(ease * target).toLocaleString() + (suffix || '');
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ============================================================
+     COPY CONTRACT ADDRESS
+  ============================================================ */
+  function copyContract() {
+    const addr  = document.getElementById('contractAddr').textContent;
+    const btn   = document.getElementById('copyBtn');
+    const toast = document.getElementById('copyToast');
+    const doConfirm = () => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      toast.classList.add('show');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+        toast.classList.remove('show');
+      }, 2500);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(addr).then(doConfirm).catch(() => fallbackCopy(addr, doConfirm));
+    } else {
+      fallbackCopy(addr, doConfirm);
+    }
+  }
+  function fallbackCopy(text, cb) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    cb();
+  }
+
+  /* ============================================================
+     INTERSECTION OBSERVER — UNIVERSAL FADE + SLIDE + STAGGER
+  ============================================================ */
+  const revealTargets = document.querySelectorAll(
+    '.about-left, .about-right, .dist-card, .htb-card, .tl-item, .social-btn, .strip-stat, .tl-card'
+  );
+
+  revealTargets.forEach(el => {
+    el.style.opacity  = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const siblings = Array.from(entry.target.parentElement.children).filter(c => revealTargets.length && c.style.opacity === '0');
+      const idx = Array.from(revealTargets).indexOf(entry.target);
+      setTimeout(() => {
+        entry.target.style.opacity   = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }, (idx % 6) * 90);
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  revealTargets.forEach(el => revealObserver.observe(el));
+
+  /* ============================================================
+     COMMUNITY STRIP COUNTERS — animate on scroll
+  ============================================================ */
+  const stripVals = document.querySelectorAll('.strip-val[data-target]');
+  const stripObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const target = parseInt(e.target.dataset.target, 10);
+      animateCounter(e.target, target, '+');
+      stripObserver.unobserve(e.target);
+    });
+  }, { threshold: 0.5 });
+  stripVals.forEach(el => stripObserver.observe(el));
+
+  /* ============================================================
+     DONUT CHART ANIMATE ON SCROLL
+  ============================================================ */
+  const donut = document.querySelector('.donut-chart');
+  if (donut) {
+    donut.style.transform = 'rotate(0deg) scale(0.85)';
+    donut.style.opacity   = '0';
+    donut.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    const donutObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.width = e.target.style.width; // trigger reflow
-          barObserver.unobserve(e.target);
-        }
+        if (!e.isIntersecting) return;
+        e.target.style.opacity   = '1';
+        e.target.style.transform = 'rotate(0deg) scale(1)';
+        donutObserver.unobserve(e.target);
       });
     }, { threshold: 0.3 });
-    distBars.forEach(b => barObserver.observe(b));
+    donutObserver.observe(donut);
+  }
 
-    // fade-in on scroll
-    const fadeEls = document.querySelectorAll('.about-left, .about-right, .dist-card, .htb-card');
-    fadeEls.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  /* ============================================================
+     DIST BARS ANIMATE ON SCROLL
+  ============================================================ */
+  const distBars = document.querySelectorAll('.dist-bar');
+  const storedWidths = { liq: '40%', mkt: '30%', team: '20%', burn: '10%' };
+  distBars.forEach(b => { b.dataset.w = b.style.width; b.style.width = '0'; });
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.style.width = e.target.dataset.w;
+      barObserver.unobserve(e.target);
     });
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => {
-            e.target.style.opacity = '1';
-            e.target.style.transform = 'translateY(0)';
-          }, 80 * (Array.from(fadeEls).indexOf(e.target) % 4));
-          fadeObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    fadeEls.forEach(el => fadeObserver.observe(el));
+  }, { threshold: 0.3 });
+  distBars.forEach(b => barObserver.observe(b));
+
   </script>
 
 </body>
