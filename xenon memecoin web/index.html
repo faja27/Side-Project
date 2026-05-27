@@ -488,6 +488,557 @@
       100% { opacity: 0; transform: translateY(-80px) scale(0); }
     }
 
+    /* ===================== SHARED SECTION UTILITIES ===================== */
+    .section-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--color-accent);
+      box-shadow: 0 0 6px var(--color-accent);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: var(--color-white);
+      line-height: 1.1;
+      margin-bottom: var(--space-lg);
+    }
+    .section-title .highlight {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===================== ABOUT ===================== */
+    .about {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-2xl) var(--space-xl);
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-surface) 50%, var(--color-bg) 100%);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .about-left { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+    .about-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      font-size: 1rem;
+      color: var(--color-text-dim);
+      line-height: 1.8;
+    }
+    .about-body p strong { color: var(--color-primary); font-weight: 600; }
+
+    .about-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    .about-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-dim);
+      background: var(--color-bg-card);
+      transition: all var(--transition);
+    }
+    .about-pill:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      box-shadow: 0 0 10px rgba(0,255,136,0.2);
+    }
+
+    /* right: mascot frame */
+    .about-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-mascot-frame {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* decorative frame lines */
+    .frame-border {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 0 40px rgba(0,255,136,0.08), inset 0 0 60px rgba(0,255,136,0.04);
+    }
+
+    .frame-corner {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+    }
+    .frame-corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); border-radius: var(--radius-sm) 0 0 0; }
+    .frame-corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--color-primary); border-right: 2px solid var(--color-primary); border-radius: 0 var(--radius-sm) 0 0; }
+    .frame-corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); border-radius: 0 0 0 var(--radius-sm); }
+    .frame-corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--color-primary); border-right: 2px solid var(--color-primary); border-radius: 0 0 var(--radius-sm) 0; }
+
+    /* scan line moving inside frame */
+    .frame-scan {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+      opacity: 0.4;
+      animation: scan-down 4s linear infinite;
+      border-radius: 1px;
+    }
+    @keyframes scan-down {
+      0%   { top: 0%; }
+      100% { top: 100%; }
+    }
+
+    /* HUD readout labels */
+    .frame-hud {
+      position: absolute;
+      font-family: var(--font-heading);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--color-primary);
+      opacity: 0.5;
+    }
+    .frame-hud.top-left   { top: 10px; left: 14px; }
+    .frame-hud.top-right  { top: 10px; right: 14px; text-align: right; }
+    .frame-hud.bot-left   { bottom: 10px; left: 14px; }
+    .frame-hud.bot-right  { bottom: 10px; right: 14px; text-align: right; }
+
+    .about-mascot-big {
+      font-size: 10rem;
+      filter: drop-shadow(0 0 40px rgba(0,255,136,0.5));
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+      user-select: none;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%       { transform: translateY(-14px) rotate(3deg); }
+    }
+
+    .about-glow-bg {
+      position: absolute;
+      inset: 20px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(ellipse at center, rgba(0,255,136,0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    /* ===================== TOKENOMICS ===================== */
+    .tokenomics {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .tokenomics-header { text-align: center; margin-bottom: var(--space-2xl); }
+
+    .supply-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-xl);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-xl);
+    }
+    .supply-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+    .supply-value {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-shadow: 0 0 12px rgba(0,255,136,0.5);
+    }
+    .supply-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--color-border);
+    }
+
+    .tax-row {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      margin-bottom: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+    .tax-badge {
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0,229,255,0.3);
+      color: var(--color-accent);
+      background: rgba(0,229,255,0.06);
+    }
+
+    /* chart + cards layout */
+    .tokenomics-body {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    /* donut chart */
+    .donut-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .donut-chart {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #00ff88 0%   40%,
+        #00e5ff 40%  70%,
+        #8b5cf6 70%  90%,
+        #ff6b35 90%  100%
+      );
+      box-shadow: 0 0 30px rgba(0,255,136,0.2), 0 0 60px rgba(0,229,255,0.1);
+      animation: spin 30s linear infinite;
+    }
+
+    .donut-hole {
+      position: absolute;
+      inset: 32px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+    }
+    .donut-hole-label {
+      font-family: var(--font-heading);
+      font-size: 0.5rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+    .donut-hole-value {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-shadow: 0 0 10px rgba(0,255,136,0.5);
+    }
+
+    /* distribution cards */
+    .dist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .dist-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .dist-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    }
+    .dist-card.liq::before  { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+    .dist-card.mkt::before  { background: #00e5ff; box-shadow: 0 0 8px #00e5ff; }
+    .dist-card.team::before { background: #8b5cf6; box-shadow: 0 0 8px #8b5cf6; }
+    .dist-card.burn::before { background: #ff6b35; box-shadow: 0 0 8px #ff6b35; }
+
+    .dist-card:hover {
+      border-color: rgba(0,255,136,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .dist-pct {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .dist-card.liq  .dist-pct { color: #00ff88; text-shadow: 0 0 12px rgba(0,255,136,0.5); }
+    .dist-card.mkt  .dist-pct { color: #00e5ff; text-shadow: 0 0 12px rgba(0,229,255,0.5); }
+    .dist-card.team .dist-pct { color: #8b5cf6; text-shadow: 0 0 12px rgba(139,92,246,0.5); }
+    .dist-card.burn .dist-pct { color: #ff6b35; text-shadow: 0 0 12px rgba(255,107,53,0.5); }
+
+    .dist-info { display: flex; flex-direction: column; gap: 3px; }
+    .dist-name {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+    .dist-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-dim);
+      line-height: 1.4;
+    }
+
+    /* progress bar */
+    .dist-bar-wrap {
+      margin-top: var(--space-xs);
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .dist-bar {
+      height: 100%;
+      border-radius: var(--radius-pill);
+      transition: width 1.2s ease;
+    }
+    .dist-card.liq  .dist-bar { background: #00ff88; width: 40%; }
+    .dist-card.mkt  .dist-bar { background: #00e5ff; width: 30%; }
+    .dist-card.team .dist-bar { background: #8b5cf6; width: 20%; }
+    .dist-card.burn .dist-bar { background: #ff6b35; width: 10%; }
+
+    /* contract address */
+    .contract-block {
+      margin-top: var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .contract-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+    .contract-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      width: 100%;
+      max-width: 640px;
+    }
+    .contract-addr {
+      font-family: var(--font-heading);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .btn-copy {
+      flex-shrink: 0;
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-primary);
+      color: #000;
+      background: var(--color-primary);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-copy:hover {
+      box-shadow: var(--glow-green);
+      transform: translateY(-1px);
+    }
+    .btn-copy.copied {
+      background: transparent;
+      color: var(--color-primary);
+    }
+    .copy-toast {
+      font-size: 0.72rem;
+      color: var(--color-primary);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .copy-toast.show { opacity: 1; }
+
+    /* ===================== HOW TO BUY ===================== */
+    .how-to-buy {
+      position: relative;
+      z-index: 1;
+      padding: var(--space-2xl) var(--space-xl);
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-surface) 50%, var(--color-bg) 100%);
+    }
+
+    .htb-header { text-align: center; margin-bottom: var(--space-2xl); }
+
+    .htb-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      position: relative;
+    }
+
+    /* connector line between cards */
+    .htb-grid::before {
+      content: '';
+      position: absolute;
+      top: 52px;
+      left: calc(12.5% + 16px);
+      right: calc(12.5% + 16px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
+      opacity: 0.25;
+      z-index: 0;
+    }
+
+    .htb-card {
+      position: relative;
+      z-index: 1;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .htb-card:hover {
+      border-color: rgba(0,255,136,0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,255,136,0.08);
+    }
+
+    .htb-num-wrap {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .htb-num-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid var(--color-primary);
+      opacity: 0.3;
+      animation: spin 8s linear infinite;
+    }
+    .htb-num {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      text-shadow: var(--glow-green);
+      position: relative;
+      z-index: 1;
+    }
+
+    .htb-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .htb-title {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+
+    .htb-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-dim);
+      line-height: 1.65;
+    }
+
+    .htb-arrow {
+      position: absolute;
+      right: -18px;
+      top: 50px;
+      width: 16px;
+      height: 16px;
+      z-index: 2;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .htb-card:last-child .htb-arrow { display: none; }
+
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 768px) {
       .navbar { padding: 0 var(--space-md); }
@@ -515,6 +1066,37 @@
       .orbit-ring-1 { width: 170px; height: 170px; }
       .orbit-ring-2 { width: 220px; height: 220px; }
       .orbit-ring-3 { width: 260px; height: 260px; }
+
+      /* about */
+      .about { padding: var(--space-xl) var(--space-md); }
+      .about-inner { grid-template-columns: 1fr; text-align: center; }
+      .about-right { order: -1; }
+      .about-mascot-frame { width: 240px; height: 240px; }
+      .about-mascot-big { font-size: 7rem; }
+      .about-pills { justify-content: center; }
+
+      /* tokenomics */
+      .tokenomics { padding: var(--space-xl) var(--space-md); }
+      .tokenomics-body { grid-template-columns: 1fr; justify-items: center; }
+      .dist-grid { grid-template-columns: 1fr 1fr; }
+      .supply-badge { flex-direction: column; gap: var(--space-sm); text-align: center; }
+      .supply-divider { width: 80%; height: 1px; }
+      .contract-bar { flex-direction: column; align-items: stretch; }
+      .contract-addr { text-align: center; }
+
+      /* how to buy */
+      .how-to-buy { padding: var(--space-xl) var(--space-md); }
+      .htb-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+      }
+      .htb-grid::before { display: none; }
+      .htb-arrow { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .dist-grid { grid-template-columns: 1fr; }
+      .htb-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -618,6 +1200,209 @@
     </div>
   </section>
 
+  <!-- ==================== ABOUT ==================== -->
+  <section class="about" id="about">
+    <div class="section-inner">
+      <div class="about-inner">
+
+        <!-- LEFT: text -->
+        <div class="about-left">
+          <div class="section-tag">Transmitted Signal</div>
+          <h2 class="section-title">Who Are <span class="highlight">We?</span></h2>
+
+          <div class="about-body">
+            <p>
+              <strong>XENON</strong> was not created. It was <strong>discovered</strong> — buried in a deep-space signal
+              intercepted by a rogue satellite on the outer edge of the solar system.
+              The encoded message contained one instruction: <em>buy $XENO.</em>
+            </p>
+            <p>
+              Our mission is simple: to unite the galaxy's most degenerate traders under a single
+              galactic banner. No utility, no roadmap to nowhere — just pure, <strong>unfiltered
+              cosmic degeneracy</strong> on the Ethereum blockchain.
+            </p>
+            <p>
+              The aliens chose ETH for its <strong>decentralization</strong> and its
+              <strong>gas fees high enough to filter out the weak.</strong>
+              Only true believers survive the transaction cost. Are you one of us?
+            </p>
+          </div>
+
+          <div class="about-pills">
+            <span class="about-pill">🛸 Decentralized</span>
+            <span class="about-pill">🔒 LP Locked</span>
+            <span class="about-pill">🚀 No Dev Wallet</span>
+            <span class="about-pill">👾 Community Owned</span>
+            <span class="about-pill">⚡ Fast Finality</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: mascot frame -->
+        <div class="about-right">
+          <div class="about-mascot-frame">
+            <div class="frame-border"></div>
+            <div class="frame-corner tl"></div>
+            <div class="frame-corner tr"></div>
+            <div class="frame-corner bl"></div>
+            <div class="frame-corner br"></div>
+            <div class="frame-scan"></div>
+            <div class="frame-hud top-left">XENO-UNIT-01<br>STATUS: ONLINE</div>
+            <div class="frame-hud top-right">SIG: 99.9%<br>LOCK: YES</div>
+            <div class="frame-hud bot-left">ETH CHAIN<br>BLOCK: LIVE</div>
+            <div class="frame-hud bot-right">ALIEN MODE<br>ENGAGED ✓</div>
+            <div class="about-glow-bg"></div>
+            <div class="about-mascot-big">👾</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TOKENOMICS ==================== -->
+  <section class="tokenomics" id="tokenomics">
+    <div class="section-inner">
+      <div class="tokenomics-header">
+        <div class="section-tag" style="justify-content:center;">Galactic Economy</div>
+        <h2 class="section-title">Tokenomics</h2>
+
+        <div class="supply-badge">
+          <div>
+            <div class="supply-label">Total Supply</div>
+            <div class="supply-value">1,000,000,000,000 $XENO</div>
+          </div>
+          <div class="supply-divider"></div>
+          <div class="tax-row" style="margin:0;gap:var(--space-sm);">
+            <span class="tax-badge">Buy Tax: 1%</span>
+            <span class="tax-badge">Sell Tax: 1%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tokenomics-body">
+        <!-- donut chart -->
+        <div class="donut-wrapper">
+          <div class="donut-chart">
+            <div class="donut-hole">
+              <span class="donut-hole-label">Total</span>
+              <span class="donut-hole-value">100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- distribution cards -->
+        <div class="dist-grid">
+          <div class="dist-card liq">
+            <div class="dist-pct">40%</div>
+            <div class="dist-info">
+              <div class="dist-name">Liquidity</div>
+              <div class="dist-desc">Locked LP to ensure stable trading and deep on-chain liquidity.</div>
+              <div class="dist-bar-wrap"><div class="dist-bar"></div></div>
+            </div>
+          </div>
+
+          <div class="dist-card mkt">
+            <div class="dist-pct">30%</div>
+            <div class="dist-info">
+              <div class="dist-name">Marketing</div>
+              <div class="dist-desc">Fueling the galactic invasion: influencers, raids, and alien ads.</div>
+              <div class="dist-bar-wrap"><div class="dist-bar"></div></div>
+            </div>
+          </div>
+
+          <div class="dist-card team">
+            <div class="dist-pct">20%</div>
+            <div class="dist-info">
+              <div class="dist-name">Team</div>
+              <div class="dist-desc">Vested 12 months. The aliens need fuel to keep the ships running.</div>
+              <div class="dist-bar-wrap"><div class="dist-bar"></div></div>
+            </div>
+          </div>
+
+          <div class="dist-card burn">
+            <div class="dist-pct">10%</div>
+            <div class="dist-info">
+              <div class="dist-name">Burn</div>
+              <div class="dist-desc">Sent to the void. Deflationary pressure from the black hole wallet.</div>
+              <div class="dist-bar-wrap"><div class="dist-bar"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- contract address -->
+      <div class="contract-block">
+        <div class="contract-label">Contract Address</div>
+        <div class="contract-bar">
+          <span class="contract-addr" id="contractAddr">0x1A2b3C4d5E6f7A8b9C0d1E2f3A4b5C6d7E8f9A0b</span>
+          <button class="btn-copy" id="copyBtn" onclick="copyContract()">Copy</button>
+        </div>
+        <div class="copy-toast" id="copyToast">✓ Address copied to clipboard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW TO BUY ==================== -->
+  <section class="how-to-buy" id="howtobuy">
+    <div class="section-inner">
+      <div class="htb-header">
+        <div class="section-tag" style="justify-content:center;">Mission Briefing</div>
+        <h2 class="section-title">How to <span class="highlight">Buy $XENO</span></h2>
+        <p style="color:var(--color-text-dim);font-size:0.95rem;max-width:520px;margin:0 auto;">
+          Follow these 4 steps to join the galactic army. The mission takes under 5 minutes.
+        </p>
+      </div>
+
+      <div class="htb-grid">
+
+        <div class="htb-card">
+          <div class="htb-num-wrap">
+            <div class="htb-num-ring"></div>
+            <span class="htb-num">01</span>
+          </div>
+          <div class="htb-icon">🦊</div>
+          <div class="htb-title">Install MetaMask</div>
+          <p class="htb-desc">Download the MetaMask browser extension or mobile app. Create a new wallet and secure your seed phrase in a safe location.</p>
+          <span class="htb-arrow">›</span>
+        </div>
+
+        <div class="htb-card">
+          <div class="htb-num-wrap">
+            <div class="htb-num-ring"></div>
+            <span class="htb-num">02</span>
+          </div>
+          <div class="htb-icon">💰</div>
+          <div class="htb-title">Buy ETH</div>
+          <p class="htb-desc">Purchase Ethereum (ETH) from any centralized exchange — Binance, Coinbase, or Kraken. Send it directly to your MetaMask wallet address.</p>
+          <span class="htb-arrow">›</span>
+        </div>
+
+        <div class="htb-card">
+          <div class="htb-num-wrap">
+            <div class="htb-num-ring"></div>
+            <span class="htb-num">03</span>
+          </div>
+          <div class="htb-icon">🔄</div>
+          <div class="htb-title">Open Uniswap</div>
+          <p class="htb-desc">Go to app.uniswap.org and connect your MetaMask wallet. Make sure you're on Ethereum Mainnet and set slippage to 2–5%.</p>
+          <span class="htb-arrow">›</span>
+        </div>
+
+        <div class="htb-card">
+          <div class="htb-num-wrap">
+            <div class="htb-num-ring"></div>
+            <span class="htb-num">04</span>
+          </div>
+          <div class="htb-icon">🚀</div>
+          <div class="htb-title">Swap ETH → $XENO</div>
+          <p class="htb-desc">Paste the $XENO contract address into Uniswap's token field. Enter your ETH amount, confirm the swap, and welcome to the galactic horde.</p>
+          <span class="htb-arrow">›</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== JS ==================== -->
   <script>
     // hamburger toggle
@@ -654,6 +1439,66 @@
       setTimeout(() => p.remove(), 3000);
     }
     setInterval(spawnParticle, 400);
+
+    // copy contract address
+    function copyContract() {
+      const addr = document.getElementById('contractAddr').textContent;
+      const btn  = document.getElementById('copyBtn');
+      const toast = document.getElementById('copyToast');
+      navigator.clipboard.writeText(addr).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        toast.classList.add('show');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+          toast.classList.remove('show');
+        }, 2500);
+      }).catch(() => {
+        // fallback for non-secure context
+        const ta = document.createElement('textarea');
+        ta.value = addr;
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2500);
+      });
+    }
+
+    // animate dist bars on scroll into view
+    const distBars = document.querySelectorAll('.dist-bar');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.style.width; // trigger reflow
+          barObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    distBars.forEach(b => barObserver.observe(b));
+
+    // fade-in on scroll
+    const fadeEls = document.querySelectorAll('.about-left, .about-right, .dist-card, .htb-card');
+    fadeEls.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, 80 * (Array.from(fadeEls).indexOf(e.target) % 4));
+          fadeObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    fadeEls.forEach(el => fadeObserver.observe(el));
   </script>
 
 </body>
