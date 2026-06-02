@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontak & Lokasi — Kopi Arunika</title>
+  <meta name="description" content="Temukan Kopi Arunika di Balaraja, Tangerang. Jam operasional, alamat, dan formulir kontak." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <span class="section-label">Temukan Kami</span>
+      <h1 class="section-title">Kontak & <em>Lokasi</em></h1>
+      <p class="section-desc">Kami selalu senang menyambut kunjunganmu. Datang langsung, hubungi kami, atau kirim pesan — kami siap melayani.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="contact-inner">
+
+      <!-- LEFT: Info -->
+      <div>
+        <span class="section-label reveal" style="display: block; margin-bottom: 0.8rem;">Informasi</span>
+        <h2 class="section-title reveal" style="font-size: 2rem; margin-bottom: 2rem;">Hubungi <em>kami</em></h2>
+
+        <div class="contact-info-card reveal">
+          <div class="info-card-icon">📍</div>
+          <span class="info-card-title">Alamat</span>
+          <p class="info-card-text">
+            Jl. Raya Artisan No. 12<br>
+            Permata Balaraja, Kec. Balaraja<br>
+            Kab. Tangerang, Banten 15660
+          </p>
+        </div>
+
+        <div class="contact-info-card reveal">
+          <div class="info-card-icon">🕐</div>
+          <span class="info-card-title">Jam Operasional</span>
+          <table class="hours-table">
+            <tbody>
+              <tr id="row-senin">
+                <td>Senin – Jumat</td>
+                <td>07.00 – 22.00</td>
+              </tr>
+              <tr>
+                <td>Sabtu – Minggu</td>
+                <td>08.00 – 23.00</td>
+              </tr>
+              <tr>
+                <td>Hari Libur Nasional</td>
+                <td>09.00 – 21.00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.8rem;">
+            * Jam buka dapat berubah pada hari-hari khusus. Cek Instagram kami untuk info terkini.
+          </p>
+        </div>
+
+        <div class="contact-info-card reveal">
+          <div class="info-card-icon">📞</div>
+          <span class="info-card-title">Telepon & WhatsApp</span>
+          <p class="info-card-text">
+            <a href="tel:+6285612345678" style="color: var(--cream-muted);">+62 856-1234-5678</a><br>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Aktif setiap hari saat jam buka</span>
+          </p>
+        </div>
+
+        <div class="contact-info-card reveal">
+          <div class="info-card-icon">✉️</div>
+          <span class="info-card-title">Email</span>
+          <p class="info-card-text">
+            <a href="mailto:hello@kopiarunika.id" style="color: var(--cream-muted);">hello@kopiarunika.id</a><br>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Dibalas dalam 1×24 jam</span>
+          </p>
+        </div>
+
+        <div class="contact-info-card reveal">
+          <div class="info-card-icon">📱</div>
+          <span class="info-card-title">Media Sosial</span>
+          <p class="info-card-text">
+            Instagram: <strong style="color: var(--gold);">@kopiarunika</strong><br>
+            TikTok: <strong style="color: var(--gold);">@kopiarunika.id</strong>
+          </p>
+        </div>
+
+        <!-- MAP PLACEHOLDER -->
+        <div class="map-placeholder reveal">
+          🗺️
+          <p>Jl. Raya Artisan No. 12, Balaraja, Tangerang</p>
+          <a href="https://maps.google.com" target="_blank" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--gold); color: var(--bg-dark); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">Buka di Google Maps</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div>
+        <div class="contact-form reveal">
+          <div class="form-title">Kirim Pesan</div>
+          <p class="form-subtitle">Untuk reservasi, event private, atau sekadar ingin menyapa — kami siap merespons.</p>
+
+          <div id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="firstName">Nama Depan</label>
+                <input type="text" id="firstName" class="form-input" placeholder="Ahmad" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lastName">Nama Belakang</label>
+                <input type="text" id="lastName" class="form-input" placeholder="Fauzi" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" class="form-input" placeholder="kamu@email.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Nomor WhatsApp</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+62 8xx-xxxx-xxxx" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="topic">Keperluan</label>
+              <select id="topic" class="form-select">
+                <option value="">Pilih keperluan...</option>
+                <option value="reservasi">Reservasi Meja</option>
+                <option value="event">Private Event / Gathering</option>
+                <option value="catering">Catering Kopi</option>
+                <option value="kerjasama">Kerjasama / Partnership</option>
+                <option value="feedback">Saran & Masukan</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Pesan</label>
+              <textarea id="message" class="form-textarea" placeholder="Ceritakan keperluan Anda..."></textarea>
+            </div>
+
+            <button class="form-submit" id="submitBtn" onclick="handleSubmit()">
+              Kirim Pesan ✉️
+            </button>
+          </div>
+
+          <!-- Success State -->
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon">✅</div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.8rem;">Pesan Terkirim!</h3>
+            <p>Terima kasih telah menghubungi kami. Tim Kopi Arunika akan merespons dalam 1×24 jam. Sampai jumpa di kedai! ☕</p>
+            <button onclick="resetForm()" style="margin-top: 1.5rem; padding: 0.7rem 1.5rem; background: transparent; border: 1px solid rgba(200,151,58,0.3); color: var(--cream-muted); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;">Kirim Pesan Lain</button>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div style="margin-top: 2rem;" class="reveal">
+          <span style="font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.5rem;">FAQ</span>
+
+          <div id="faqContainer"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="components.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Form handler
+    function handleSubmit() {
+      const firstName = document.getElementById('firstName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!firstName || !email || !message) {
+        alert('Mohon isi minimal nama, email, dan pesan Anda.');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Mengirim...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      }, 1200);
+    }
+
+    function resetForm() {
+      document.getElementById('contactForm').style.display = 'block';
+      document.getElementById('formSuccess').style.display = 'none';
+      document.getElementById('firstName').value = '';
+      document.getElementById('lastName').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('topic').value = '';
+      document.getElementById('message').value = '';
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Kirim Pesan ✉️';
+      btn.disabled = false;
+    }
+
+    // FAQ Accordion
+    const faqs = [
+      { q: 'Apakah bisa reservasi meja?', a: 'Ya! Kami menerima reservasi untuk group 4 orang ke atas, terutama untuk event khusus. Hubungi kami via WhatsApp atau formulir di samping.' },
+      { q: 'Apakah tersedia area parkir?', a: 'Tersedia parkir kendaraan roda dua dan roda empat di halaman kedai. Parkir gratis untuk semua pelanggan.' },
+      { q: 'Apakah bisa request kopi custom?', a: 'Tentu! Barista kami senang berdiskusi tentang preferensimu — tingkat keasaman, kekentalan, suhu seduh, dan lain-lain.' },
+      { q: 'Apakah tersedia paket catering kopi?', a: 'Kami melayani catering kopi untuk event, seminar, dan pernikahan. Hubungi kami minimal 3 hari sebelum acara untuk diskusi lebih lanjut.' },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('faqContainer');
+      faqs.forEach((faq, i) => {
+        const el = document.createElement('div');
+        el.style.cssText = 'border-bottom: 1px solid rgba(200,151,58,0.1); overflow: hidden;';
+        el.innerHTML = `
+          <button onclick="toggleFaq(${i})" style="width: 100%; text-align: left; padding: 1.2rem 0; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+            <span style="font-size: 0.9rem; font-weight: 700; color: var(--cream-muted);">${faq.q}</span>
+            <span id="faq-icon-${i}" style="color: var(--gold); font-size: 1.2rem; flex-shrink: 0; transition: transform 0.3s;">+</span>
+          </button>
+          <div id="faq-body-${i}" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease;">
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; padding-bottom: 1.2rem;">${faq.a}</p>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+    });
+
+    function toggleFaq(i) {
+      const body = document.getElementById(`faq-body-${i}`);
+      const icon = document.getElementById(`faq-icon-${i}`);
+      const isOpen = body.style.maxHeight !== '0px' && body.style.maxHeight !== '';
+      // close all
+      faqs.forEach((_, j) => {
+        document.getElementById(`faq-body-${j}`).style.maxHeight = '0px';
+        document.getElementById(`faq-icon-${j}`).textContent = '+';
+        document.getElementById(`faq-icon-${j}`).style.transform = 'rotate(0deg)';
+      });
+      if (!isOpen) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        icon.textContent = '−';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // Highlight today's hours
+    document.addEventListener('DOMContentLoaded', () => {
+      const day = new Date().getDay(); // 0=Sun, 6=Sat
+      const rows = document.querySelectorAll('.hours-table tr');
+      if (day >= 1 && day <= 5) rows[0]?.classList.add('today');
+      else if (day === 0 || day === 6) rows[1]?.classList.add('today');
+    });
+  </script>
+</body>
+</html>
