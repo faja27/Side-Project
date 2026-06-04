@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking — IRONCLAD Barbershop</title>
+  <meta name="description" content="Booking online IRONCLAD Barbershop Citra Raya. Pilih barber, layanan, dan jadwal." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1400&q=60');"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-inner">
+      <div class="section-tag">Reservasi Online</div>
+      <h1 class="section-title" style="font-size:clamp(3.5rem,8vw,7rem);">BOOK <span class="copper">YOUR</span><br>SESSION</h1>
+      <p class="section-desc" style="margin-top:1rem;">Pilih barber, layanan, dan waktu. Konfirmasi via WhatsApp dalam 15 menit.</p>
+    </div>
+  </section>
+
+  <section class="booking-section">
+    <div class="booking-inner">
+
+      <div class="booking-form reveal">
+        <div id="bookingContent">
+          <div class="bf-title">BOOKING FORM</div>
+          <p class="bf-sub">Isi form di bawah dan kami konfirmasi segera.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">Nama</label>
+              <input type="text" id="fname" class="form-input" placeholder="Bro Kevin" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">WhatsApp</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+62 812-xxxx" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="barber">Pilih Barber</label>
+            <select id="barber" class="form-select">
+              <option value="">-- Pilih barber --</option>
+              <option>Reza Malik — Head Barber (Fade & Classic)</option>
+              <option>Dimas Arya — Senior Barber (All Styles)</option>
+              <option>Bagas Tri — Barber (Fade & Textured)</option>
+              <option>Andi Putra — Barber (Classic & Beard)</option>
+              <option>Bebas (assign by team)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="service">Pilih Layanan</label>
+            <select id="service" class="form-select">
+              <option value="">-- Pilih layanan --</option>
+              <optgroup label="✂️ Haircut">
+                <option>Classic Cut — Rp 55K</option>
+                <option>Textured Cut — Rp 75K</option>
+                <option>Pompadour / Quiff — Rp 80K</option>
+              </optgroup>
+              <optgroup label="⚡ Fade">
+                <option>Mid Fade — Rp 65K</option>
+                <option>High Fade — Rp 65K</option>
+                <option>Skin Fade — Rp 70K</option>
+                <option>Undercut — Rp 65K</option>
+              </optgroup>
+              <optgroup label="🪒 Beard & Shave">
+                <option>Beard Trim — Rp 35K</option>
+                <option>Beard Grooming — Rp 45K</option>
+                <option>Hot Towel Shave — Rp 60K</option>
+              </optgroup>
+              <optgroup label="🎯 Paket">
+                <option>Cut + Beard Combo — Rp 90K</option>
+                <option>Full Package — Rp 150K</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="bookDate">Tanggal</label>
+              <input type="date" id="bookDate" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bookTime">Jam</label>
+              <select id="bookTime" class="form-select">
+                <option value="">-- Pilih jam --</option>
+                <option>09.00</option><option>10.00</option><option>11.00</option>
+                <option>12.00</option><option>13.00</option><option>14.00</option>
+                <option>15.00</option><option>16.00</option><option>17.00</option>
+                <option>18.00</option><option>19.00</option><option>20.00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="notes">Catatan (Opsional)</label>
+            <textarea id="notes" class="form-textarea" placeholder="Referensi gaya, panjang yang diinginkan, atau catatan khusus..."></textarea>
+          </div>
+
+          <button class="form-submit" id="bookBtn" onclick="submitBooking()">CONFIRM BOOKING →</button>
+        </div>
+
+        <div class="booking-success" id="bookSuccess">
+          <div style="font-size:3rem; margin-bottom:1rem;">✂️</div>
+          <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:2px; margin-bottom:0.8rem;">BOOKED!</h3>
+          <p style="color:var(--white-2); font-size:0.95rem; line-height:1.85;">Tim IRONCLAD akan konfirmasi via WhatsApp dalam 15 menit. See you at the chair! 💈</p>
+          <a href="https://wa.me/6281234567890" target="_blank" style="display:inline-block; margin-top:1.5rem; padding:0.9rem 2rem; background:var(--copper); color:var(--black); font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:3px; text-transform:uppercase;">CHAT WHATSAPP</a>
+          <br>
+          <button onclick="resetBooking()" style="margin-top:1rem; padding:0.7rem 1.5rem; background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">BOOK LAGI</button>
+        </div>
+      </div>
+
+      <!-- INFO SIDE -->
+      <div class="booking-info">
+
+        <div class="binfo-card reveal">
+          <div class="bic-icon">🕐</div>
+          <span class="bic-title">Jam Buka</span>
+          <div class="bic-text">
+            <div class="hours-row" data-days="1,2,3,4,5">
+              <span class="day">Senin – Jumat</span>
+              <span class="time">09.00 – 21.00</span>
+            </div>
+            <div class="hours-row" data-days="6,0">
+              <span class="day">Sabtu – Minggu</span>
+              <span class="time">08.00 – 22.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="binfo-card reveal">
+          <div class="bic-icon">📍</div>
+          <span class="bic-title">Lokasi</span>
+          <p class="bic-text">
+            Ruko Citra Raya Boulevard No. 12A<br>
+            Citra Raya, Tangerang, Banten<br><br>
+            <a href="https://maps.google.com" target="_blank" style="color:var(--copper);">Buka di Google Maps →</a>
+          </p>
+        </div>
+
+        <div class="binfo-card reveal">
+          <div class="bic-icon">📞</div>
+          <span class="bic-title">WhatsApp</span>
+          <p class="bic-text">
+            <strong style="color:var(--white); font-size:1rem;">+62 812-3456-7890</strong><br>
+            <span style="font-size:0.8rem;">Chat langsung untuk booking atau tanya-tanya</span>
+          </p>
+        </div>
+
+        <!-- BARBERSHOP PHOTO -->
+        <div class="reveal" style="overflow:hidden;">
+          <img
+            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80"
+            alt="Interior IRONCLAD Barbershop"
+            style="width:100%; height:220px; object-fit:cover;"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="binfo-card reveal">
+          <div class="bic-icon">ℹ️</div>
+          <span class="bic-title">Info Booking</span>
+          <div class="bic-text" style="display:flex;flex-direction:column;gap:0.4rem;">
+            <span>✓ Konfirmasi WA dalam 15 menit</span>
+            <span>✓ Datang 5 mnt sebelum jadwal</span>
+            <span>✓ Reschedule min. 2 jam sebelumnya</span>
+            <span>✓ Walk-in welcome jika slot kosong</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="components.js"></script>
+  <script>
+    function submitBooking() {
+      const fname   = document.getElementById('fname').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const service = document.getElementById('service').value;
+      const date    = document.getElementById('bookDate').value;
+      const time    = document.getElementById('bookTime').value;
+      if (!fname || !phone || !service || !date || !time) {
+        alert('Mohon lengkapi nama, WhatsApp, layanan, tanggal, dan jam.');
+        return;
+      }
+      const btn = document.getElementById('bookBtn');
+      btn.textContent = 'PROCESSING...'; btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('bookingContent').style.display = 'none';
+        document.getElementById('bookSuccess').style.display = 'block';
+      }, 1400);
+    }
+    function resetBooking() {
+      document.getElementById('bookingContent').style.display = 'block';
+      document.getElementById('bookSuccess').style.display = 'none';
+      ['fname','phone','notes'].forEach(id => document.getElementById(id).value = '');
+      ['barber','service','bookTime'].forEach(id => document.getElementById(id).value = '');
+      const btn = document.getElementById('bookBtn');
+      btn.textContent = 'CONFIRM BOOKING →'; btn.disabled = false;
+      document.getElementById('bookDate').value = new Date().toISOString().split('T')[0];
+    }
+  </script>
+</body>
+</html>
