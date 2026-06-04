@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Konsultasi — Aura Skin Clinic</title>
+  <meta name="description" content="Booking konsultasi di Aura Skin Clinic. Konsultasi pertama gratis. Pilih dokter, layanan, dan jadwal." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-pretitle">
+        <div class="spt-line"></div>
+        <span class="spt-text">Konsultasi Pertama Gratis</span>
+      </div>
+      <h1 class="section-title">Booking <em>Konsultasi</em></h1>
+      <p class="section-desc">Pilih dokter, layanan, dan jadwal yang sesuai. Kami konfirmasi dalam 30 menit via WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="booking-section">
+    <div class="booking-inner">
+
+      <!-- FORM -->
+      <div class="booking-form-wrap reveal">
+        <div id="bookingContent">
+          <div class="booking-title">Form Reservasi</div>
+          <p class="booking-sub">Lengkapi data di bawah untuk mengamankan jadwal Anda.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">Nama Depan</label>
+              <input type="text" id="fname" class="form-input" placeholder="Bella" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lname">Nama Belakang</label>
+              <input type="text" id="lname" class="form-input" placeholder="Oktavia" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Nomor WhatsApp</label>
+            <input type="tel" id="phone" class="form-input" placeholder="+62 813-xxxx-xxxx" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="age">Usia</label>
+            <input type="number" id="age" class="form-input" placeholder="25" min="15" max="80" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dokter">Pilih Dokter</label>
+            <select id="dokter" class="form-select">
+              <option value="">-- Pilih dokter --</option>
+              <option>dr. Amelia Putri, SpKK — Spesialis Kulit & Jerawat</option>
+              <option>dr. Rizal Hendra — Botox, Filler & Estetika</option>
+              <option>dr. Sinta Maharani — Laser & Teknologi Advanced</option>
+              <option>Bebas (sesuai ketersediaan)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="layanan">Layanan / Keperluan</label>
+            <select id="layanan" class="form-select">
+              <option value="">-- Pilih layanan --</option>
+              <optgroup label="🌸 Facial">
+                <option>Konsultasi & Facial Basic</option>
+                <option>Facial Signature Aura</option>
+                <option>Hydrafacial</option>
+                <option>Chemical Peeling</option>
+              </optgroup>
+              <optgroup label="⚡ Laser">
+                <option>Laser Pigmentasi / Flek</option>
+                <option>Laser Acne & Bekas Luka</option>
+                <option>IPL Photorejuvenation</option>
+                <option>HIFU Lifting</option>
+              </optgroup>
+              <optgroup label="💉 Injeksi">
+                <option>Botox</option>
+                <option>Filler</option>
+                <option>Thread Lift</option>
+                <option>Mesotherapy</option>
+              </optgroup>
+              <optgroup label="💊 Vitamin">
+                <option>Suntik Vitamin C</option>
+                <option>Suntik Glutathione</option>
+                <option>Infus Whitening</option>
+              </optgroup>
+              <optgroup label="📦 Paket">
+                <option>Paket Glow Basic</option>
+                <option>Paket Glow Premium</option>
+                <option>Paket Acne Free</option>
+                <option>Paket Anti-Aging</option>
+                <option>Paket Slimming</option>
+              </optgroup>
+              <option>Konsultasi Umum (belum tahu)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="bookDate">Tanggal</label>
+              <input type="date" id="bookDate" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bookTime">Waktu</label>
+              <select id="bookTime" class="form-select">
+                <option value="">-- Pilih jam --</option>
+                <option>09.00 – 10.00</option>
+                <option>10.00 – 11.00</option>
+                <option>11.00 – 12.00</option>
+                <option>13.00 – 14.00</option>
+                <option>14.00 – 15.00</option>
+                <option>15.00 – 16.00</option>
+                <option>16.00 – 17.00</option>
+                <option>17.00 – 18.00</option>
+                <option>18.00 – 19.00</option>
+                <option>19.00 – 20.00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="keluhan">Keluhan / Catatan</label>
+            <textarea id="keluhan" class="form-textarea" placeholder="Ceritakan kondisi kulit Anda saat ini, keluhan utama, atau pertanyaan yang ingin dikonsultasikan..."></textarea>
+          </div>
+
+          <div style="background:var(--rose-glow); border:1px solid var(--border-rose); border-radius:10px; padding:1rem 1.2rem; margin-bottom:1.5rem; font-size:0.82rem; color:var(--rose);">
+            ✨ Konsultasi pertama <strong>GRATIS</strong> — tidak ada biaya tersembunyi. Datang, konsultasi, dan putuskan setelahnya.
+          </div>
+
+          <button class="form-submit" id="bookBtn" onclick="submitBooking()">
+            Konfirmasi Booking →
+          </button>
+        </div>
+
+        <div class="booking-success" id="bookingSuccess">
+          <div class="ok-icon">💝</div>
+          <h3 style="font-family:'Bodoni Moda',serif; font-size:1.8rem; font-weight:500; margin-bottom:0.8rem;">Booking Dikonfirmasi!</h3>
+          <p style="color:var(--ink-muted); font-size:0.92rem; line-height:1.85;">
+            Tim Aura Skin akan menghubungi Anda via WhatsApp dalam <strong>30 menit</strong> untuk konfirmasi jadwal. Sampai jumpa di klinik kami! ✨
+          </p>
+          <a href="https://wa.me/6281345678901" target="_blank" style="display:inline-block; margin-top:1.5rem; padding:0.9rem 2rem; background:var(--rose); color:white; font-size:0.72rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; border-radius:100px;">Chat WhatsApp →</a>
+          <br>
+          <button onclick="resetBooking()" style="margin-top:1rem; padding:0.7rem 1.5rem; background:transparent; border:1px solid var(--border); border-radius:100px; color:var(--ink-muted); font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;">Booking Lagi</button>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="booking-info">
+
+        <div class="info-card reveal">
+          <div class="info-card-icon">🕐</div>
+          <span class="info-card-title">Jam Praktek</span>
+          <div class="info-card-text">
+            <div class="hours-row" data-days="1,2,3,4,5">
+              <span class="day">Senin – Jumat</span>
+              <span class="time">09.00 – 20.00</span>
+            </div>
+            <div class="hours-row" data-days="6">
+              <span class="day">Sabtu</span>
+              <span class="time">09.00 – 17.00</span>
+            </div>
+            <div class="hours-row" data-days="0">
+              <span class="day">Minggu</span>
+              <span class="time">Tutup</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card reveal">
+          <div class="info-card-icon">📍</div>
+          <span class="info-card-title">Lokasi Klinik</span>
+          <p class="info-card-text">
+            Ruko Citra Raya Commercial Area Blok A5<br>
+            Citra Raya, Tangerang, Banten<br><br>
+            <a href="https://maps.google.com" target="_blank" style="color:var(--rose); font-size:0.82rem;">Buka di Google Maps →</a>
+          </p>
+        </div>
+
+        <div class="info-card reveal">
+          <div class="info-card-icon">📞</div>
+          <span class="info-card-title">Kontak Langsung</span>
+          <p class="info-card-text">
+            WhatsApp: <strong style="color:var(--ink);">+62 813-4567-8901</strong><br>
+            <span style="font-size:0.8rem;">Respon cepat di jam operasional</span>
+          </p>
+        </div>
+
+        <div class="info-card reveal">
+          <div class="info-card-icon">ℹ️</div>
+          <span class="info-card-title">Yang Perlu Dipersiapkan</span>
+          <div class="info-card-text" style="display:flex;flex-direction:column;gap:0.5rem;">
+            <span>✓ Hadir 10 menit sebelum jadwal</span>
+            <span>✓ Tidak pakai makeup tebal</span>
+            <span>✓ Bawa riwayat alergi jika ada</span>
+            <span>✓ Foto kondisi kulit saat ini (opsional)</span>
+            <span>✓ Konsultasi pertama gratis</span>
+          </div>
+        </div>
+
+        <div class="info-card reveal" style="background:linear-gradient(135deg,var(--rose) 0%,var(--rose-light) 100%); border-color:transparent;">
+          <div class="info-card-icon">🌸</div>
+          <span class="info-card-title" style="color:rgba(255,255,255,0.8);">Konsultasi Gratis</span>
+          <p class="info-card-text" style="color:rgba(255,255,255,0.85);">
+            Kunjungan pertama Anda gratis — termasuk konsultasi dokter dan analisis kondisi kulit. Tidak ada obligasi untuk melanjutkan treatment.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="components.js"></script>
+  <script src="main.js"></script>
+  <script>
+    function submitBooking() {
+      const fname   = document.getElementById('fname').value.trim();
+      const phone   = document.getElementById('phone').value.trim();
+      const layanan = document.getElementById('layanan').value;
+      const date    = document.getElementById('bookDate').value;
+      const time    = document.getElementById('bookTime').value;
+
+      if (!fname || !phone || !layanan || !date || !time) {
+        alert('Mohon lengkapi nama, WhatsApp, layanan, tanggal, dan jam terlebih dahulu.');
+        return;
+      }
+      const btn = document.getElementById('bookBtn');
+      btn.textContent = 'Memproses...';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('bookingContent').style.display = 'none';
+        document.getElementById('bookingSuccess').style.display = 'block';
+      }, 1400);
+    }
+
+    function resetBooking() {
+      document.getElementById('bookingContent').style.display = 'block';
+      document.getElementById('bookingSuccess').style.display = 'none';
+      ['fname','lname','phone','age','keluhan'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      ['dokter','layanan','bookTime'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      const btn = document.getElementById('bookBtn');
+      btn.textContent = 'Konfirmasi Booking →';
+      btn.disabled = false;
+      const d = new Date(); d.setDate(d.getDate()+1);
+      document.getElementById('bookDate').value = d.toISOString().split('T')[0];
+    }
+  </script>
+</body>
+</html>
