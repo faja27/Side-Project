@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Properti — Griya Prima</title>
+  <meta name="description" content="Temukan ratusan properti dijual dan disewa di Citra Raya, Tangerang, dan sekitarnya." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-inner">
+      <div class="section-pre"><div class="sp-line"></div><span class="sp-text">200+ Listing Aktif</span></div>
+      <h1 class="section-title" style="color:var(--white); font-size:clamp(2.5rem,5vw,4.5rem); margin-top:0.8rem;">Daftar <em>Properti</em></h1>
+      <p class="section-desc" style="color:rgba(255,255,255,0.6); margin-top:1rem;">Rumah, ruko, dan kavling dijual maupun disewa di kawasan Tangerang terpilih.</p>
+    </div>
+  </section>
+
+  <section class="listing-section">
+    <div class="listing-inner">
+
+      <div class="listing-toolbar">
+        <div class="listing-count">Menampilkan <strong id="propCount">9</strong> properti</div>
+        <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
+          <div class="prop-filters">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="jual">Dijual</button>
+            <button class="filter-btn" data-filter="sewa">Disewa</button>
+            <button class="filter-btn" data-filter="ruko">Ruko</button>
+          </div>
+          <select class="sort-select">
+            <option>Terbaru</option>
+            <option>Harga Terendah</option>
+            <option>Harga Tertinggi</option>
+            <option>Luas Terbesar</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="listing-layout">
+
+        <!-- SIDEBAR FILTER -->
+        <aside class="filter-sidebar">
+          <div class="filter-title">Filter Properti</div>
+
+          <div class="filter-group">
+            <span class="filter-group-title">Tipe Properti</span>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox" checked /> Rumah</label>
+              <label class="filter-option"><input type="checkbox" checked /> Ruko / Kios</label>
+              <label class="filter-option"><input type="checkbox" /> Kavling Tanah</label>
+              <label class="filter-option"><input type="checkbox" /> Apartemen</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-group-title">Status</span>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox" checked /> Dijual</label>
+              <label class="filter-option"><input type="checkbox" checked /> Disewa</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-group-title">Harga Maksimal</span>
+            <input type="range" class="filter-range" min="0" max="5000" value="3000" id="priceRange" oninput="document.getElementById('priceVal').textContent = 'Rp ' + this.value + ' Juta'" />
+            <div class="filter-range-vals">
+              <span>Rp 0</span>
+              <span id="priceVal">Rp 3000 Juta</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-group-title">Kamar Tidur</span>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox" /> 1 Kamar</label>
+              <label class="filter-option"><input type="checkbox" checked /> 2 Kamar</label>
+              <label class="filter-option"><input type="checkbox" checked /> 3 Kamar</label>
+              <label class="filter-option"><input type="checkbox" /> 4+ Kamar</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-group-title">Lokasi</span>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox" checked /> Citra Raya</label>
+              <label class="filter-option"><input type="checkbox" checked /> Permata Balaraja</label>
+              <label class="filter-option"><input type="checkbox" /> Citra Garden</label>
+              <label class="filter-option"><input type="checkbox" /> BSD City</label>
+              <label class="filter-option"><input type="checkbox" /> Serpong</label>
+            </div>
+          </div>
+
+          <button class="filter-apply">Terapkan Filter</button>
+        </aside>
+
+        <!-- LISTING GRID -->
+        <div>
+          <div class="prop-grid" id="propGrid">
+
+            <div class="prop-card reveal" data-type="jual">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80" alt="Cluster Jade Citra Raya" loading="lazy" />
+                <span class="prop-badge badge-jual">Dijual</span>
+                <span class="prop-badge badge-baru" style="left:auto;right:5.5rem;">Baru</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Rumah Cluster · Citra Raya</div>
+                <div class="prop-name">Cluster Jade — Type 72/120</div>
+                <div class="prop-location">📍 Citra Raya, Tangerang</div>
+                <div class="prop-price">Rp 1,45 Miliar <span>/ unit</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🛏</span> 3 KT</div>
+                  <div class="spec-item"><span class="spec-icon">🚿</span> 2 KM</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 72/120 m²</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="jual">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80" alt="Rumah Minimalis" loading="lazy" />
+                <span class="prop-badge badge-jual">Dijual</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Rumah · Permata Balaraja</div>
+                <div class="prop-name">Rumah Minimalis Type 54/96</div>
+                <div class="prop-location">📍 Permata Balaraja, Tangerang</div>
+                <div class="prop-price">Rp 680 Juta <span>/ unit</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🛏</span> 3 KT</div>
+                  <div class="spec-item"><span class="spec-icon">🚿</span> 2 KM</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 54/96 m²</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="sewa">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="Rumah Sewa" loading="lazy" />
+                <span class="prop-badge badge-sewa">Disewa</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Rumah Sewa · Citra Garden</div>
+                <div class="prop-name">Rumah 2 Lantai Fully Furnished</div>
+                <div class="prop-location">📍 Citra Garden, Tangerang</div>
+                <div class="prop-price">Rp 28 Juta <span>/ tahun</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🛏</span> 3 KT</div>
+                  <div class="spec-item"><span class="spec-icon">🚿</span> 2 KM</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 80 m²</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="ruko">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80" alt="Ruko" loading="lazy" />
+                <span class="prop-badge badge-jual">Dijual</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Ruko 3 Lantai · Boulevard</div>
+                <div class="prop-name">Ruko Boulevard Citra Raya SHM</div>
+                <div class="prop-location">📍 Boulevard Utama Citra Raya</div>
+                <div class="prop-price">Rp 2,3 Miliar <span>/ unit</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🏢</span> 3 Lantai</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 48/72 m²</div>
+                  <div class="spec-item"><span class="spec-icon">📄</span> SHM</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="jual">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="Rumah Mewah" loading="lazy" />
+                <span class="prop-badge badge-jual">Dijual</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Rumah Mewah · Citra Grand</div>
+                <div class="prop-name">Villa Asri Type 120 — 2 Lantai</div>
+                <div class="prop-location">📍 Citra Grand, Tangerang</div>
+                <div class="prop-price">Rp 2,1 Miliar <span>/ unit</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🛏</span> 4 KT</div>
+                  <div class="spec-item"><span class="spec-icon">🚿</span> 3 KM</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 120/180 m²</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="sewa">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=80" alt="Rumah Sewa Cluster" loading="lazy" />
+                <span class="prop-badge badge-sewa">Disewa</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Rumah Sewa · BSD Area</div>
+                <div class="prop-name">Cluster Greenfield Type 36</div>
+                <div class="prop-location">📍 BSD City, Tangerang Selatan</div>
+                <div class="prop-price">Rp 18 Juta <span>/ tahun</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🛏</span> 2 KT</div>
+                  <div class="spec-item"><span class="spec-icon">🚿</span> 1 KM</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 36 m²</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="jual">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=700&q=80" alt="Rumah Tropis" loading="lazy" />
+                <span class="prop-badge badge-jual">Dijual</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Rumah · Balaraja Barat</div>
+                <div class="prop-name">Rumah Hook Corner Type 60/120</div>
+                <div class="prop-location">📍 Balaraja Barat, Tangerang</div>
+                <div class="prop-price">Rp 750 Juta <span>/ unit</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🛏</span> 3 KT</div>
+                  <div class="spec-item"><span class="spec-icon">🚿</span> 2 KM</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 60/120 m²</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="ruko">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="Ruko Komersial 2" loading="lazy" />
+                <span class="prop-badge badge-sewa">Disewa</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Ruko Sewa · Komersial</div>
+                <div class="prop-name">Ruko 2 Lantai Citra Garden</div>
+                <div class="prop-location">📍 Citra Garden Commercial</div>
+                <div class="prop-price">Rp 35 Juta <span>/ tahun</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">🏢</span> 2 Lantai</div>
+                  <div class="spec-item"><span class="spec-icon">📐</span> 32/48 m²</div>
+                  <div class="spec-item"><span class="spec-icon">📍</span> Pinggir Jalan</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-card reveal" data-type="jual">
+              <div class="prop-img">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Kavling" loading="lazy" />
+                <span class="prop-badge badge-jual">Dijual</span>
+                <div class="prop-img-overlay"></div>
+                <div class="prop-wishlist">🤍</div>
+              </div>
+              <div class="prop-body">
+                <div class="prop-type">Kavling Tanah · SHM</div>
+                <div class="prop-name">Kavling Hook 200 m² — SHM</div>
+                <div class="prop-location">📍 Citra Raya, Tangerang</div>
+                <div class="prop-price">Rp 1,1 Miliar <span>/ kavling</span></div>
+                <div class="prop-specs">
+                  <div class="spec-item"><span class="spec-icon">📐</span> 200 m²</div>
+                  <div class="spec-item"><span class="spec-icon">📄</span> SHM</div>
+                  <div class="spec-item"><span class="spec-icon">🏗️</span> Siap Bangun</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" style="padding:4rem 3rem;">
+    <div class="cta-inner">
+      <h2>Tidak menemukan yang <em>cocok?</em></h2>
+      <p>Ceritakan kebutuhan propertimu dan kami carikan opsi terbaik yang belum terdaftar online.</p>
+      <a href="kontak.html" class="btn-gold">Konsultasi dengan Agen →</a>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="components.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
