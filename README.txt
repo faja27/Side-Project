@@ -4,7 +4,7 @@ Kumpulan proyek sampingan yang berfokus pada eksplorasi teknologi baru, otomatis
 
 ---
 
-## 📂 Project List
+### 📂 Project List
 
 ### 1. Forex & Crypto Automation (Trading Bot)
 Eksplorasi algoritma perdagangan otomatis untuk pasar finansial (XAU/USD & Crypto).
